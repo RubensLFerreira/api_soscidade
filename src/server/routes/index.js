@@ -2,17 +2,17 @@ import express from 'express';
 
 import { StatusCodes } from 'http-status-codes';
 
-import clienteGetAll from '../controllers/clientes/GetAll.js';
-import clienteCreate from '../controllers/clientes/Create.js';
-import clienteUpdateById from '../controllers/clientes/UpdateById.js';
-import clienteDeleteById from '../controllers/clientes/DeleteById.js';
+import usuarioGetAll from '../controllers/usuario/GetAll.js';
+import usuarioCreate from '../controllers/usuario/Create.js';
+import usuarioUpdateById from '../controllers/usuario/UpdateById.js';
+import usuarioDeleteById from '../controllers/usuario/DeleteById.js';
 
 const router = express.Router();
 
-router.get('/clientes', clienteGetAll.getAll);
-router.post('/clientes', clienteCreate.create);
-router.put('/cliente/:id', clienteUpdateById.updateById);
-router.delete('/cliente/:id', clienteDeleteById.deleteById);
+router.get('/usuarios', usuarioGetAll.getAll);
+router.post('/usuarios', usuarioCreate.create);
+router.put('/usuario/:id', usuarioUpdateById.updateById);
+router.delete('/usuario/:id', usuarioDeleteById.deleteById);
 
 router.get('/', (_, res) => {
   return res.status(StatusCodes.ACCEPTED).send('Hello world! Página inicial');
