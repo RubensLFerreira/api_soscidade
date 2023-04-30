@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../database';
+import sequelize from '../database/index.js';
 
 const Usuario = sequelize.define('usuario', {
   id: {
@@ -47,8 +47,8 @@ const Usuario = sequelize.define('usuario', {
   }
 });
 
-(async () => {
-  await Usuario.sync({ force: true });
-})();
+// (async () => {
+//   await Usuario.sync({ force: true });
+// })();
 
 export default Usuario;
