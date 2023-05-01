@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index.js';
 
-const Prefeitura = sequelize.define('prefeitura', {
+const Prefeitura = sequelize.define('prefeituras', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -39,7 +39,7 @@ const Prefeitura = sequelize.define('prefeitura', {
   rua: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
 });
 
 (async () => {

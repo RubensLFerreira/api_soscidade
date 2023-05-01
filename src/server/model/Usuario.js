@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index.js';
 
-const Usuario = sequelize.define('usuario', {
+const Usuario = sequelize.define('usuarios', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -12,7 +12,7 @@ const Usuario = sequelize.define('usuario', {
     allowNull: false,
   },
   cpf: {
-    type: DataTypes.BIGINT(11),
+    type: DataTypes.BIGINT,
     allowNull: false,
     unique: true,
   },
@@ -44,11 +44,11 @@ const Usuario = sequelize.define('usuario', {
   rua: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
 });
 
-// (async () => {
-//   await Usuario.sync({ force: true });
-// })();
+(async () => {
+  await Usuario.sync({ force: true });
+})();
 
 export default Usuario;
