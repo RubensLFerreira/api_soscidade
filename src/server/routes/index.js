@@ -12,6 +12,8 @@ import prefeituraCreate from '../controllers/prefeitura/Create.js';
 import prefeituraUpdateById from '../controllers/prefeitura/UpdateById.js';
 import prefeituraDeleteById from '../controllers/prefeitura/DeleteById.js';
 
+import problemaCreate from '../controllers/problema/Create.js';
+
 const router = express.Router();
 
 router.get('/usuarios', usuarioGetAll.getAll);
@@ -23,6 +25,8 @@ router.get('/prefeituras', prefeituraGetAll.getAll);
 router.post('/prefeituras', prefeituraCreate.create);
 router.put('/prefeitura/:id', prefeituraUpdateById.updateById);
 router.delete('/prefeitura/:id', prefeituraDeleteById.deleteById);
+
+router.post('/problemas', problemaCreate.create);
 
 router.get('/', (_, res) => {
   return res.status(StatusCodes.ACCEPTED).send('Hello world! Página inicial');
