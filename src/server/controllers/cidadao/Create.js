@@ -1,10 +1,10 @@
-import Usuario from '../../model/Usuario.js';
+import Cidadao from '../../models/Cidadao.js';
 
 import { StatusCodes } from 'http-status-codes';
 
-const usuarioController = {};
+const cidadaoController = {};
 
-usuarioController.create = async (req, res) => {
+cidadaoController.create = async (req, res) => {
   try {
     const {
       nome,
@@ -18,7 +18,7 @@ usuarioController.create = async (req, res) => {
       rua,
     } = req.body;
 
-    const usuario = await Usuario.create({
+    const cidadao = await Cidadao.create({
       nome,
       cpf,
       sexo,
@@ -30,7 +30,7 @@ usuarioController.create = async (req, res) => {
       rua,
     });
 
-    return res.status(StatusCodes.CREATED).json(usuario);
+    return res.status(StatusCodes.CREATED).json(cidadao);
   } catch (error) {
     console.log(error);
 
@@ -40,4 +40,4 @@ usuarioController.create = async (req, res) => {
   }
 };
 
-export default usuarioController;
+export default cidadaoController;

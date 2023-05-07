@@ -1,4 +1,4 @@
-import Prefeitura from '../../model/Prefeitura.js';
+import Prefeitura from '../../models/Prefeitura.js';
 
 import { StatusCodes } from 'http-status-codes';
 
