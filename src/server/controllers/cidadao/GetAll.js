@@ -1,6 +1,7 @@
+import { StatusCodes } from 'http-status-codes';
+
 import Cidadao from '../../models/Cidadao.js';
 
-import { StatusCodes } from 'http-status-codes';
 
 const cidadaoController = {};
 

@@ -1,6 +1,7 @@
+import { StatusCodes } from 'http-status-codes';
+
 import Prefeitura from '../../models/Prefeitura.js';
 
-import { StatusCodes } from 'http-status-codes';
 
 const prefeituraController = {};
 

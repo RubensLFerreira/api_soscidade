@@ -2,6 +2,8 @@ import Cidadao from '../../models/Cidadao.js';
 
 import { StatusCodes } from 'http-status-codes';
 
+import cidadaoSchema from '../../validators/cidadaoValidator.js';
+
 const cidadaoController = {};
 
 cidadaoController.create = async (req, res) => {
@@ -17,6 +19,18 @@ cidadaoController.create = async (req, res) => {
       bairro,
       rua,
     } = req.body;
+
+    await cidadaoSchema.validate({
+      nome,
+      cpf,
+      sexo,
+      nascimento,
+      telefone,
+      email,
+      cidade,
+      bairro,
+      rua,
+    }, { abortEarly: false });
 
     const cidadao = await Cidadao.create({
       nome,

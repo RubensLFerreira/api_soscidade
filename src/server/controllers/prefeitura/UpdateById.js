@@ -1,6 +1,8 @@
+import { StatusCodes } from 'http-status-codes';
+
 import Prefeitura from '../../models/Prefeitura.js';
 
-import { StatusCodes } from 'http-status-codes';
+import prefeituraSchema from '../../validators/prefeituraValidator.js';
 
 const prefeituraController = {};
 
@@ -18,6 +20,17 @@ prefeituraController.updateById = async (req, res) => {
       bairro,
       rua,
     } = req.body;
+
+    await prefeituraSchema.validate({
+      nome,
+      telefone,
+      email,
+      site,
+      prefeito,
+      cidade,
+      bairro,
+      rua,
+    });
 
     const prefeitura = await Prefeitura.update(
       {
