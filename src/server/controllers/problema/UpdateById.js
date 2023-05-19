@@ -1,19 +1,19 @@
 import { StatusCodes } from 'http-status-codes';
 
-import Denuncia from '../../models/Denuncia.js';
+import Problema from '../../models/Problema.js';
 
-import denunciaSchema from '../../validators/denunciaValidator.js';
+import problemaSchema from '../../validators/problemaValidator.js';
 
-const denunciaController = {};
+const problemaController = {};
 
-denunciaController.updateById = async (req, res) => {
+problemaController.updateById = async (req, res) => {
   try {
     const id = req.params.id;
 
     const { cidade, bairro, rua, tipo, observacao, cidadao_id, prefeitura_id } =
       req.body;
 
-    await denunciaSchema.validate({
+    await problemaSchema.validate({
       cidade,
       bairro,
       rua,
@@ -21,9 +21,10 @@ denunciaController.updateById = async (req, res) => {
       observacao,
       cidadao_id,
       prefeitura_id,
+      localizacao_id
     });
 
-    const denuncia = await Denuncia.update(
+    const problema = await Problema.update(
       {
         cidade,
         bairro,
@@ -32,13 +33,14 @@ denunciaController.updateById = async (req, res) => {
         observacao,
         cidadao_id,
         prefeitura_id,
+        localizacao_id
       },
       {
         where: { id: id },
       }
     );
 
-    res.status(StatusCodes.OK).json(denuncia);
+    res.status(StatusCodes.OK).json(problema);
   } catch (error) {
     console.log(error);
 

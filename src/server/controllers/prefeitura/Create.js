@@ -4,42 +4,31 @@ import Prefeitura from '../../models/Prefeitura.js';
 
 import prefeituraSchema from '../../validators/prefeituraValidator.js';
 
-
 const prefeituraController = {};
 
 prefeituraController.create = async (req, res) => {
   try {
-    const { 
-      nome,
-      telefone,
-      email,
-      site,
-      prefeito,
-      cidade,
-      bairro,
-      rua
-    } = req.body;
+    const { nome, telefone, email, senha, site, prefeito } = req.body;
 
-    await prefeituraSchema.validate({
-      nome,
-      telefone,
-      email,
-      site,
-      prefeito,
-      cidade,
-      bairro,
-      rua
-    }, { abortEarly: false});
+    await prefeituraSchema.validate(
+      {
+        nome,
+        telefone,
+        email,
+        senha,
+        site,
+        prefeito,
+      },
+      { abortEarly: false }
+    );
 
     const prefeitura = await Prefeitura.create({
       nome,
       telefone,
       email,
+      senha,
       site,
       prefeito,
-      cidade,
-      bairro,
-      rua,
     });
 
     return res.status(StatusCodes.CREATED).json(prefeitura);

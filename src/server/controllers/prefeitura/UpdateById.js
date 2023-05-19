@@ -10,26 +10,15 @@ prefeituraController.updateById = async (req, res) => {
   try {
     const id = req.params.id;
 
-    const {
-      nome,
-      telefone,
-      email,
-      site,
-      prefeito,
-      cidade,
-      bairro,
-      rua,
-    } = req.body;
+    const { nome, telefone, email, senha, site, prefeito } = req.body;
 
     await prefeituraSchema.validate({
       nome,
       telefone,
       email,
+      senha,
       site,
       prefeito,
-      cidade,
-      bairro,
-      rua,
     });
 
     const prefeitura = await Prefeitura.update(
@@ -37,11 +26,9 @@ prefeituraController.updateById = async (req, res) => {
         nome,
         telefone,
         email,
+        senha,
         site,
         prefeito,
-        cidade,
-        bairro,
-        rua,
       },
       { where: { id: id } }
     );
