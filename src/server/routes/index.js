@@ -12,8 +12,10 @@ import prefeituraCreate from '../controllers/prefeitura/Create.js';
 import prefeituraUpdateById from '../controllers/prefeitura/UpdateById.js';
 import prefeituraDeleteById from '../controllers/prefeitura/DeleteById.js';
 
-import denunciaCreate from '../controllers/denuncia/Create.js';
-import denunciaGetAll from '../controllers/denuncia/GetAll.js';
+import problemaCreate from '../controllers/problema/Create.js';
+import problemaGetAll from '../controllers/problema/GetAll.js';
+
+import localizacaoCreate from '../controllers/localizacao/Create.js';
 
 const router = express.Router();
 
@@ -27,8 +29,10 @@ router.post('/prefeituras', prefeituraCreate.create);
 router.put('/prefeitura/:id', prefeituraUpdateById.updateById);
 router.delete('/prefeitura/:id', prefeituraDeleteById.deleteById);
 
-router.get('/denuncias', denunciaGetAll.getAll);
-router.post('/denuncias', denunciaCreate.create);
+router.get('/problemas', problemaGetAll.getAll);
+router.post('/problemas', problemaCreate.create);
+
+router.post('/localizacao', localizacaoCreate.create);
 
 router.get('/', (_, res) => {
   return res.status(StatusCodes.ACCEPTED).send('Hello world! Página inicial');
