@@ -49,3 +49,5 @@ problemaController.updateById = async (req, res) => {
     });
   }
 };
+
+export default problemaController;

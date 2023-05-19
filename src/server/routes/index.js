@@ -14,8 +14,13 @@ import prefeituraDeleteById from '../controllers/prefeitura/DeleteById.js';
 
 import problemaCreate from '../controllers/problema/Create.js';
 import problemaGetAll from '../controllers/problema/GetAll.js';
+import problemaUpdateById from '../controllers/problema/UpdateById.js';
+import problemaDeleteById from '../controllers/problema/DeleteById.js';
 
 import localizacaoCreate from '../controllers/localizacao/Create.js';
+import localizacaoGetAll from '../controllers/localizacao/GetAll.js';
+import localizacaoUpdateById from '../controllers/localizacao/UpdateById.js';
+import localizacaoDeleteById from '../controllers/localizacao/DeleteById.js';
 
 const router = express.Router();
 
@@ -31,8 +36,13 @@ router.delete('/prefeitura/:id', prefeituraDeleteById.deleteById);
 
 router.get('/problemas', problemaGetAll.getAll);
 router.post('/problemas', problemaCreate.create);
+router.put('/problema/:id', problemaUpdateById.updateById);
+router.delete('/problema/:id', problemaDeleteById.deleteById);
 
+router.get('/localizacao', localizacaoGetAll.getAll);
 router.post('/localizacao', localizacaoCreate.create);
+router.put('/localizacao/:id', localizacaoUpdateById.updateById);
+router.delete('/localizacao/:id', localizacaoDeleteById.deleteById);
 
 router.get('/', (_, res) => {
   return res.status(StatusCodes.ACCEPTED).send('Hello world! Página inicial');

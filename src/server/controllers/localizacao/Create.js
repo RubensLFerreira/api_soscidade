@@ -1,6 +1,7 @@
+import { StatusCodes } from 'http-status-codes';
+
 import Localizacao from '../../models/Localizacao.js';
 
-import { StatusCodes } from 'http-status-codes';
 
 const localizacaoController = {};
 
