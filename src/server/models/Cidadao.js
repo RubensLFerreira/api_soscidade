@@ -11,24 +11,24 @@ const Cidadao = sequelize.define(
       primaryKey: true,
     },
     nome: {
-      type: DataTypes.STRING(250),
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    senha: {
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
     cpf: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: 'cidadao_cpf_key',
     },
     sexo: {
-      type: DataTypes.CHAR(1),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     nascimento: {
-      type: DataTypes.STRING(10),
-      allowNull: false,
-    },
-    telefone: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
@@ -36,16 +36,8 @@ const Cidadao = sequelize.define(
       allowNull: false,
       unique: 'cidadao_email_key',
     },
-    cidade: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    bairro: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    rua: {
-      type: DataTypes.STRING,
+    telefone: {
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
   },

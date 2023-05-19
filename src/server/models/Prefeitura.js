@@ -5,17 +5,21 @@ const Prefeitura = sequelize.define(
   'prefeitura',
   {
     id: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
     },
     nome: {
-      type: DataTypes.STRING(250),
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    telefone: {
-      type: DataTypes.BIGINT,
+    site: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    prefeito: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     email: {
@@ -23,29 +27,13 @@ const Prefeitura = sequelize.define(
       allowNull: false,
       unique: 'prefeitura_email_key',
     },
-    site: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      unique: 'prefeitura_site_key',
-    },
-    prefeito: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    cidade: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    bairro: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    rua: {
-      type: DataTypes.STRING,
+    senha: {
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
   },
   {
+    sequelize,
     tableName: 'prefeitura',
     schema: 'public',
     timestamps: false,
@@ -59,11 +47,6 @@ const Prefeitura = sequelize.define(
         name: 'prefeitura_pkey',
         unique: true,
         fields: [{ name: 'id' }],
-      },
-      {
-        name: 'prefeitura_site_key',
-        unique: true,
-        fields: [{ name: 'site' }],
       },
     ],
   }

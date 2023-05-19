@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index.js';
 
-const Denuncia = sequelize.define(
-  'denuncia',
+const Localizacao = sequelize.define(
+  'localizacao',
   {
     id: {
       autoIncrement: true,
@@ -10,7 +10,15 @@ const Denuncia = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    cidade: {
+    latitude: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    lonfitude: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    rua: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -18,43 +26,23 @@ const Denuncia = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    rua: {
+    cidade: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    tipo: {
+    uf: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    observacao: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    cidadao_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'cidadao',
-        key: 'id',
-      },
-    },
-    prefeitura_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'prefeitura',
-        key: 'id',
-      },
     },
   },
   {
     sequelize,
-    tableName: 'denuncia',
+    tableName: 'localizacao',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: 'denuncia_pkey',
+        name: 'localizacao_pkey',
         unique: true,
         fields: [{ name: 'id' }],
       },
@@ -62,4 +50,4 @@ const Denuncia = sequelize.define(
   }
 );
 
-export default Denuncia;
+export default Localizacao;
