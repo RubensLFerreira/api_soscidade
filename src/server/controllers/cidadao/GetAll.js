@@ -1,20 +1,25 @@
-import { StatusCodes } from 'http-status-codes';
-
+import Usuario from '../../models/Usuario.js';
 import Cidadao from '../../models/Cidadao.js';
 
+import { StatusCodes } from 'http-status-codes';
 
 const cidadaoController = {};
 
-cidadaoController.getAll = async (_, res) => {
+cidadaoController.getAll = async (req, res) => {
   try {
-    const cidadao = await Cidadao.findAll();
+    const cidadaos = await Cidadao.findAll({
+      include: {
+        model: Usuario,
+        as: 'usuario',
+      },
+    });
 
-    res.status(StatusCodes.OK).json(cidadao);
+    return res.status(StatusCodes.OK).json({ cidadaos });
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.BAD_REQUEST).json({
-      message: 'Ocorreu um erro ao buscar os registros.',
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Ocorreu um erro ao buscar os registros de cidadão e usuário!',
     });
   }
 };
