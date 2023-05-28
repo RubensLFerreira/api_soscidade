@@ -25,6 +25,13 @@ Acessar o endereço
 ```bash
 http://localhost:8080/
 ```
+
+Observação: 
+
+- Baixar as extensões recomendadas na pasta `vscode`.
+- É necessário atualizar a conexão com banco de dados com suas credências no arquivo `.venv` com base no exemplo `.venv.exemple`.
+- Passar um valor aleatório para a chave SECRET no arquivo `.venv.exemple`.
+
 ## Autores
 
 - [RubensLFerreira](https://github.com/RubensLFerreira)
