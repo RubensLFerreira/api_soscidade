@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const denunciaSchema = yup.object().shape({
+const problemaSchema = yup.object().shape({
   cidade: yup.string().min(3).required('Campo cidade é obrigatório'),
   bairro: yup.string().min(3).required('Campo bairro é obrigatório'),
   rua: yup.string().min(3).required('Campo rua é obrigatório'),
@@ -18,4 +18,4 @@ const denunciaSchema = yup.object().shape({
     .required('Deve ser um número inteiro'),
 });
 
-export default denunciaSchema;
+export default problemaSchema;
