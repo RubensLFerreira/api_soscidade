@@ -1,4 +1,5 @@
 import Problema from '../../models/Problema.js';
+import Localizacao from '../../models/Localizacao.js';
 
 import { StatusCodes } from 'http-status-codes';
 
@@ -7,26 +8,40 @@ const problemaController = {};
 problemaController.create = async (req, res) => {
   try {
     const {
-      categoria,
       imagem,
       observacao,
       status,
-      cidadao_id,
-      prefeitura_id,
-      localizacao_id,
+      categoria,
+      cidadao,
+      prefeitura,
+      latitude,
+      longitude,
+      rua,
+      bairro,
+      cidade,
+      uf,
     } = req.body;
 
+    const localizacao = await Localizacao.create({
+      latitude,
+      longitude,
+      rua,
+      bairro,
+      cidade,
+      uf,
+    });
+
     const problema = await Problema.create({
-      categoria,
       imagem,
       observacao,
       status,
-      cidadao_id,
-      prefeitura_id,
-      localizacao_id,
+      categoria_id: categoria,
+      cidadao_id: cidadao,
+      prefeitura_id: prefeitura,
+      localizacao_id: localizacao.id,
     });
 
-    return res.status(StatusCodes.CREATED).json(problema);
+    return res.status(StatusCodes.CREATED).json({ problema, localizacao });
   } catch (error) {
     console.log(error);
 

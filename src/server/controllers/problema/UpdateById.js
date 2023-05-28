@@ -1,51 +1,61 @@
-import { StatusCodes } from 'http-status-codes';
-
 import Problema from '../../models/Problema.js';
+import Localizacao from '../../models/Localizacao.js';
 
-import problemaSchema from '../../validators/problemaValidator.js';
+import { StatusCodes } from 'http-status-codes';
 
 const problemaController = {};
 
 problemaController.updateById = async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
 
-    const { cidade, bairro, rua, tipo, observacao, cidadao_id, prefeitura_id } =
-      req.body;
-
-    await problemaSchema.validate({
-      cidade,
-      bairro,
-      rua,
-      tipo,
+    const {
+      imagem,
       observacao,
-      cidadao_id,
-      prefeitura_id,
-      localizacao_id
-    });
+      status,
+      categoria,
+      cidadao,
+      prefeitura,
+      latitude,
+      longitude,
+      rua,
+      bairro,
+      cidade,
+      uf,
+      localizacaoId,
+    } = req.body;
+
+    const localizacao = await Localizacao.update(
+      {
+        latitude,
+        longitude,
+        rua,
+        bairro,
+        cidade,
+        uf,
+      },
+      { where: { id: id } }
+    );
 
     const problema = await Problema.update(
       {
-        cidade,
-        bairro,
-        rua,
-        tipo,
+        imagem,
         observacao,
-        cidadao_id,
-        prefeitura_id,
-        localizacao_id
+        status,
+        categoria_id: categoria,
+        cidadao_id: cidadao,
+        prefeitura_id: prefeitura,
+        localizacao_id: localizacao.id,
       },
-      {
-        where: { id: id },
-      }
+      { where: { id: id } }
     );
 
-    res.status(StatusCodes.OK).json(problema);
+    return res.status(StatusCodes.CREATED).json({ problema, localizacao });
   } catch (error) {
     console.log(error);
 
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message: 'Erro ao atualizar registro',
+      message: 'Ocorreu um erro criar registro!',
     });
   }
 };
