@@ -1,20 +1,28 @@
-import { StatusCodes } from 'http-status-codes';
-
 import Prefeitura from '../../models/Prefeitura.js';
+import Usuario from '../../models/Usuario.js';
 
+import { StatusCodes } from 'http-status-codes';
 
 const prefeituraController = {};
 
-prefeituraController.getAll = async (_, res) => {
+prefeituraController.getAll = async (req, res) => {
   try {
-    const prefeitura = await Prefeitura.findAll();
+    const prefeituras = await Prefeitura.findAll({
+      include: {
+        model: Usuario,
+        as: 'usuario',
+        // attributes: {
+        //   exclude: ['senha'],
+        // },
+      },
+    });
 
-    res.status(StatusCodes.OK).json(prefeitura);
+    return res.status(StatusCodes.OK).json({ prefeituras });
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.BAD_REQUEST).json({
-      message: 'Ocorreu um erro ao buscar os registros.',
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Ocorreu um erro ao buscar os registros de cidadão e usuário!',
     });
   }
 };
