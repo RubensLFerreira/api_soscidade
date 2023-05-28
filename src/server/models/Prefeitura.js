@@ -1,6 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index.js';
 
+import Usuario from './Usuario.js';
+
 const Prefeitura = sequelize.define(
   'prefeitura',
   {
@@ -10,10 +12,6 @@ const Prefeitura = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    nome: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     site: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -22,14 +20,13 @@ const Prefeitura = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
+    usuario_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      unique: 'prefeitura_email_key',
-    },
-    senha: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
+      references: {
+        model: 'usuario',
+        key: 'id',
+      },
     },
   },
   {
@@ -39,11 +36,6 @@ const Prefeitura = sequelize.define(
     timestamps: false,
     indexes: [
       {
-        name: 'prefeitura_email_key',
-        unique: true,
-        fields: [{ name: 'email' }],
-      },
-      {
         name: 'prefeitura_pkey',
         unique: true,
         fields: [{ name: 'id' }],
@@ -51,5 +43,7 @@ const Prefeitura = sequelize.define(
     ],
   }
 );
+
+Prefeitura.belongsTo(Usuario, { foreignKey: 'usuario_id', as: 'usuario' });
 
 export default Prefeitura;

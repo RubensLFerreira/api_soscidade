@@ -1,6 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index.js';
 
+import Localizacao from './Localizacao.js';
+
 const Problema = sequelize.define(
   'problema',
   {
@@ -9,10 +11,6 @@ const Problema = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-    },
-    categoria: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
     imagem: {
       type: DataTypes.STRING,
@@ -24,7 +22,15 @@ const Problema = sequelize.define(
     },
     status: {
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      allowNull: false,
+    },
+    categoria_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'categoria',
+        key: 'id',
+      },
     },
     cidadao_id: {
       type: DataTypes.INTEGER,
@@ -65,5 +71,7 @@ const Problema = sequelize.define(
     ],
   }
 );
+
+Problema.belongsTo(Localizacao, { foreignKey: 'localizacao_id' });
 
 export default Problema;

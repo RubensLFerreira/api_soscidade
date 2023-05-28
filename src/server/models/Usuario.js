@@ -1,10 +1,8 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index.js';
 
-import Problema from './Problema.js';
-
-const Localizacao = sequelize.define(
-  'localizacao',
+const Usuario = sequelize.define(
+  'usuario',
   {
     id: {
       autoIncrement: true,
@@ -12,39 +10,49 @@ const Localizacao = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    latitude: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    longitude: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    rua: {
+    nome: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    bairro: {
+    login: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    cidade: {
-      type: DataTypes.STRING,
+    senha: {
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
-    uf: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: 'usuario_email_key',
+    },
+    telefone: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    perfil_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'perfil',
+        key: 'id',
+      },
     },
   },
   {
     sequelize,
-    tableName: 'localizacao',
+    tableName: 'usuario',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: 'localizacao_pkey',
+        name: 'usuario_email_key',
+        unique: true,
+        fields: [{ name: 'email' }],
+      },
+      {
+        name: 'usuario_pkey',
         unique: true,
         fields: [{ name: 'id' }],
       },
@@ -52,4 +60,4 @@ const Localizacao = sequelize.define(
   }
 );
 
-export default Localizacao;
+export default Usuario;
