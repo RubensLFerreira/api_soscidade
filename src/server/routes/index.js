@@ -4,7 +4,6 @@ import authPrefeitura from '../middlewares/authPrefeitura.js';
 
 import { StatusCodes } from 'http-status-codes';
 
-
 import cidadaoCreate from '../controllers/cidadao/Create.js';
 import cidadaoGetAll from '../controllers/cidadao/GetAll.js';
 import cidadaoUpdateById from '../controllers/cidadao/UpdateById.js';
@@ -20,8 +19,7 @@ import problemaGetAll from '../controllers/problema/GetAll.js';
 import problemaUpdateById from '../controllers/problema/UpdateById.js';
 import problemaDeleteById from '../controllers/problema/DeleteById.js';
 
-import usuarioLogin from '../controllers/login/usuarioLogin.js';
-
+import usuarioLogin from '../controllers/login/index.js';
 
 const router = express.Router();
 
