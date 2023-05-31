@@ -21,13 +21,9 @@ const Cidadao = sequelize.define(
       type: DataTypes.DATEONLY,
       allowNull: true,
     },
-    sexo_id: {
-      type: DataTypes.INTEGER,
+    sexo: {
+      type: DataTypes.CHAR(1),
       allowNull: true,
-      references: {
-        model: 'sexo',
-        key: 'id',
-      },
     },
     usuario_id: {
       type: DataTypes.INTEGER,

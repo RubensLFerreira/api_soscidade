@@ -1,6 +1,8 @@
 import Prefeitura from '../../models/Prefeitura.js';
 import Usuario from '../../models/Usuario.js';
 
+import prefeituraSchema from '../../validators/prefeituraValidator.js';
+
 import { StatusCodes } from 'http-status-codes';
 
 const prefeituraController = {};
@@ -19,6 +21,19 @@ prefeituraController.updateById = async (req, res) => {
       senha,
       usuarioId,
     } = req.body;
+
+    await prefeituraSchema.validate(
+      {
+        nome,
+        telefone,
+        email,
+        prefeito,
+        site,
+        login,
+        senha,
+      },
+      { abortEarly: false }
+    );
 
     const prefeitura = await Prefeitura.update(
       {
@@ -40,13 +55,13 @@ prefeituraController.updateById = async (req, res) => {
       { where: { id:usuarioId } }
     );
 
-    res.status(StatusCodes.OK).json({ prefeitura, usuario });
+    return res.status(StatusCodes.OK).json({ prefeitura, usuario });
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message: 'Erro ao atualizar o registro de prefeitura e usuário!',
-      error: error.message,
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Erro ao atualziar registro!',
+      validator: error.errors,
     });
   }
 };

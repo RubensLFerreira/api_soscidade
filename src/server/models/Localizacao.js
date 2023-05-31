@@ -1,8 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../database/index.js';
 
-import Problema from './Problema.js';
-
 const Localizacao = sequelize.define(
   'localizacao',
   {

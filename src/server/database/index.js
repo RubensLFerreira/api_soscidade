@@ -1,4 +1,6 @@
 import { Sequelize } from 'sequelize';
+import chalk from 'chalk';
+
 import 'dotenv/config';
 
 export const sequelize = new Sequelize({
@@ -13,10 +15,18 @@ export const sequelize = new Sequelize({
 sequelize
   .authenticate()
   .then(() => {
-    console.log('\nConexão com o banco de dados estabelecida com sucesso!\n');
+    console.log(
+      chalk.bgGreen.bold(
+        '\nConexão com o banco de dados estabelecida com sucesso!\n'
+      )
+    );
   })
   .catch((error) => {
-    console.log(`\nOcorreu um erro ao conectar com o banco de dados:\n${error}\n`);
+    console.log(
+      chalk.red(
+        `\nOcorreu um erro ao conectar com o banco de dados:\n${error}\n`
+      )
+    );
   });
 
 export default sequelize;

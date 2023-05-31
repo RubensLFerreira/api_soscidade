@@ -1,6 +1,8 @@
 import Cidadao from '../../models/Cidadao.js';
 import Usuario from '../../models/Usuario.js';
 
+import cidadaoSchema from '../../validators/cidadaoValidator.js';
+
 import { StatusCodes } from 'http-status-codes';
 
 const cidadaoController = {};
@@ -21,10 +23,24 @@ cidadaoController.updateById = async (req, res) => {
       usuarioId,
     } = req.body;
 
+    await cidadaoSchema.validate(
+      {
+        nome,
+        cpf,
+        sexo,
+        nascimento,
+        telefone,
+        email,
+        login,
+        senha,
+      },
+      { abortEarly: false }
+    );
+
     const cidadao = await Cidadao.update(
       {
         cpf,
-        sexo_id: sexo,
+        sexo,
         nascimento,
         usuario_id: usuarioId,
       },
@@ -43,13 +59,13 @@ cidadaoController.updateById = async (req, res) => {
       { where: { id: usuarioId } }
     );
 
-    res.status(StatusCodes.OK).json({ cidadao, usuario });
+    return res.status(StatusCodes.OK).json({ cidadao, usuario });
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message: 'Erro ao atualizar o cidadao',
-      error: error.message,
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Erro ao atualizar registro!',
+      validator: error.errors,
     });
   }
 };

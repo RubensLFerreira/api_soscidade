@@ -21,8 +21,8 @@ prefeituraController.getAll = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message: 'Ocorreu um erro ao buscar os registros de cidadão e usuário!',
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Erro ao buscar os registros de prefeitura!',
     });
   }
 };

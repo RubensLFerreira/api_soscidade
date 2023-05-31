@@ -13,11 +13,11 @@ problemaController.deleteById = async (req, res) => {
 
     const problema = await Problema.destroy({ where: { id: id } });
 
-    res.status(StatusCodes.OK).json({ problema, localizacao });
+    return res.status(StatusCodes.OK).json({ problema, localizacao });
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: 'Erro ao deletar registro!',
     });
   }

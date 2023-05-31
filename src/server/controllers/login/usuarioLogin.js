@@ -13,8 +13,11 @@ const usuarioLogin = {};
 usuarioLogin.login = async (req, res) => {
   try {
     const { login, senha, confSenha } = req.body;
+    console.log(senha);
 
     const usuario = await Usuario.findOne({ where: { login: login } });
+
+    console.log(usuario.senha);
 
     if (!login) {
       return res
@@ -40,6 +43,8 @@ usuarioLogin.login = async (req, res) => {
     }
 
     const checkSenha = await bcrypt.compare(senha, usuario.senha);
+    console.log(senha, usuario.senha);
+    console.log(typeof senha, typeof usuario.senha);
 
     if (checkSenha == false) {
       return res
@@ -52,7 +57,7 @@ usuarioLogin.login = async (req, res) => {
     const payload = { id: usuario.id, perfil_id: usuario.perfil_id };
     const token = jwt.sign(payload, secret);
 
-    res.status(StatusCodes.OK).json({ message: 'Token válido', token });
+    res.status(StatusCodes.OK).json({ token });
   } catch (error) {
     console.log(error);
 

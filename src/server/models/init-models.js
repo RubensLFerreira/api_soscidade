@@ -5,7 +5,6 @@ var _localizacao = require("./localizacao");
 var _perfil = require("./perfil");
 var _prefeitura = require("./prefeitura");
 var _problema = require("./problema");
-var _sexo = require("./sexo");
 var _usuario = require("./usuario");
 
 function initModels(sequelize) {
@@ -15,7 +14,6 @@ function initModels(sequelize) {
   var perfil = _perfil(sequelize, DataTypes);
   var prefeitura = _prefeitura(sequelize, DataTypes);
   var problema = _problema(sequelize, DataTypes);
-  var sexo = _sexo(sequelize, DataTypes);
   var usuario = _usuario(sequelize, DataTypes);
 
   problema.belongsTo(categoria, { as: "categorium", foreignKey: "categoria_id"});
@@ -28,8 +26,6 @@ function initModels(sequelize) {
   perfil.hasMany(usuario, { as: "usuarios", foreignKey: "perfil_id"});
   problema.belongsTo(prefeitura, { as: "prefeitura", foreignKey: "prefeitura_id"});
   prefeitura.hasMany(problema, { as: "problemas", foreignKey: "prefeitura_id"});
-  cidadao.belongsTo(sexo, { as: "sexo", foreignKey: "sexo_id"});
-  sexo.hasMany(cidadao, { as: "cidadaos", foreignKey: "sexo_id"});
   cidadao.belongsTo(usuario, { as: "usuario", foreignKey: "usuario_id"});
   usuario.hasMany(cidadao, { as: "cidadaos", foreignKey: "usuario_id"});
   prefeitura.belongsTo(usuario, { as: "usuario", foreignKey: "usuario_id"});
@@ -42,7 +38,6 @@ function initModels(sequelize) {
     perfil,
     prefeitura,
     problema,
-    sexo,
     usuario,
   };
 }

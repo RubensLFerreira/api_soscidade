@@ -1,6 +1,8 @@
 import Cidadao from '../../models/Cidadao.js';
 import Usuario from '../../models/Usuario.js';
 
+import cidadaoSchema from '../../validators/cidadaoValidator.js';
+
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 
@@ -16,8 +18,22 @@ cidadaoController.create = async (req, res) => {
       telefone,
       email,
       login,
-      senha,
+      senha
     } = req.body;
+
+    await cidadaoSchema.validate(
+      {
+        nome,
+        cpf,
+        sexo,
+        nascimento,
+        telefone,
+        email,
+        login,
+        senha,
+      },
+      { abortEarly: false }
+    );
 
     const salt = await bcrypt.genSalt(5);
     const senhaHash = await bcrypt.hash(senha, salt);
@@ -33,7 +49,7 @@ cidadaoController.create = async (req, res) => {
 
     const cidadao = await Cidadao.create({
       cpf,
-      sexo_id: sexo,
+      sexo,
       nascimento,
       usuario_id: usuario.id,
     });
@@ -42,8 +58,9 @@ cidadaoController.create = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      message: error.message,
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Erro ao criar registro!',
+      validator: error.errors,
     });
   }
 };

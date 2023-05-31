@@ -7,16 +7,26 @@ const prefeituraSchema = yup.object().shape({
     .positive()
     .moreThan(10)
     .required('Campo telefone obrigatório'),
-  email: yup
+    email: yup
     .string()
     .nullable()
-    .email('Campo e-mail é obrigatório')
-    .trim('Não deve conter espaços no início ou no fim'),
+    .email('Formato de e-mail digitado não válido')
+    .trim('Não deve conter espaços no início ou no fim.'),
   site: yup.string().notRequired(),
-  prefeito: yup.string().min(3).required('O campo prefeito é obrigatório'),
-  // cidade: yup.string().min(3).required('O campo cidade é obrigatório'),
-  // bairro: yup.string().min(3).required('O campo bairro é obrigatório'),
-  // rua: yup.string().min(3).required('O campo rua é obrigatório'),
+  prefeito: yup
+    .string()
+    .min(3, 'Login precisa ter no minímo 3 caracteres')
+    .required('O campo prefeito é obrigatório'),
+  login: yup
+    .string()
+    .min(3, 'Login precisa ter no minímo 3 caracteres')
+    .max(20, 'Login precisa ter no máximo 20 caracteres')
+    .required('Campo login obrigatório'),
+  senha: yup
+    .string()
+    .min(3, 'Senha precisa ter no minímo 3 caracteres')
+    .max(10, 'Senha precisa ter no máximo 10 caracteres')
+    .required('Campo senha obrigatório'),
 });
 
 export default prefeituraSchema;

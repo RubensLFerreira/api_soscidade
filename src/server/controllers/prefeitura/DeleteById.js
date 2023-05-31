@@ -17,11 +17,11 @@ prefeituraController.deleteById = async (req, res) => {
       where: { id: id },
     });
 
-    res.status(StatusCodes.OK).json({ prefeitura, usuario });
+    return res.status(StatusCodes.OK).json({ prefeitura, usuario });
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: 'Erro ao atualizar registro!',
     });
   }

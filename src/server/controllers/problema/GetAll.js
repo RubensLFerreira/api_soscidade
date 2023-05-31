@@ -18,7 +18,7 @@ problemaController.getAll = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: 'Ocorreu um erro ao buscar registros!',
     });
   }
