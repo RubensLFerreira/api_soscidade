@@ -51,7 +51,7 @@ router.post('/problema/cadastrar', problemaCreate.create);
 router.put('/problema/editar/:id', problemaUpdateById.updateById);
 router.delete('/problema/excluir:id', problemaDeleteById.deleteById);
 
-router.get('/cidadaos', authAdmin, cidadaoGetAll.getAll);
+router.get('/cidadaos', cidadaoGetAll.getAll);
 router.get('/cidadao/:id', cidadaoGetById.getById);
 // excluir cidadão por id
 
