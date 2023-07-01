@@ -2,10 +2,12 @@ import express from 'express';
 
 import { StatusCodes } from 'http-status-codes';
 
-import authCidadao from '../middlewares/authCidadao.js';
-import authPrefeitura from '../middlewares/authPrefeitura.js';
-import authAdmin from '../middlewares/authAdmin.js';
+// import authCidadao from '../middlewares/authCidadao.js';
+// import authPrefeitura from '../middlewares/authPrefeitura.js';
+// import authAdmin from '../middlewares/authAdmin.js';
+import auth from '../middlewares/auth.js';
 
+import usuarioGetById from '../controllers/Usuario/GetById.js';
 
 import cidadaoCreate from '../controllers/cidadao/Create.js';
 import cidadaoGetAll from '../controllers/cidadao/GetAll.js';
@@ -27,7 +29,6 @@ import problemaDeleteById from '../controllers/problema/DeleteById.js';
 
 import usuarioLogin from '../controllers/login/usuarioLogin.js';
 
-
 const router = express.Router();
 
 router.get('/', (_, res) => {
@@ -36,32 +37,29 @@ router.get('/', (_, res) => {
 
 router.post('/login', usuarioLogin.login);
 
-
-router.post('/cidadao/cadastrar', cidadaoCreate.create);
-router.put('/cidadao/editar/:id', authCidadao, cidadaoUpdateById.updateById);
-router.delete('/cidadao/excluir/:id', authCidadao, cidadaoDeleteById.deleteById);
-// historico do cidadão
-
-router.post('/prefeitura/cadastrar', prefeituraCreate.create);
-router.put('/prefeitura/editar/:id', authPrefeitura, prefeituraUpdateById.updateById);
-router.delete('/prefeitura/excluir/:id', authPrefeitura, prefeituraDeleteById.deleteById);
-// historico da prefeitura
-
-router.post('/problema/cadastrar', problemaCreate.create);
-router.put('/problema/editar/:id', problemaUpdateById.updateById);
-router.delete('/problema/excluir:id', problemaDeleteById.deleteById);
+router.get('/usuario/:id', usuarioGetById.getById);
 
 router.get('/cidadaos', cidadaoGetAll.getAll);
 router.get('/cidadao/:id', cidadaoGetById.getById);
+router.post('/cidadao/cadastrar', cidadaoCreate.create);
+router.put('/cidadao/editar/:id', auth, cidadaoUpdateById.updateById);
+router.delete('/cidadao/excluir/:id', auth, cidadaoDeleteById.deleteById);
 // excluir cidadão por id
+// historico do cidadão
 
-router.get('/prefeituras', authAdmin, prefeituraGetAll.getAll);
+router.get('/prefeituras', prefeituraGetAll.getAll);
 router.get('/prefeituras/:id', prefeituraGetById.getById);
+router.post('/prefeitura/cadastrar', prefeituraCreate.create);
+router.put('/prefeitura/editar/:id', auth, prefeituraUpdateById.updateById);
+router.delete('/prefeitura/excluir/:id', auth, prefeituraDeleteById.deleteById);
 // excluir prefeitura por id
+// historico da prefeitura
 
-router.get('/problemas', problemaGetAll.getAll);
+router.get('/problemas', auth, problemaGetAll.getAll);
 router.get('/problema/:id', problemaGetById.getById);
+router.post('/problema/cadastrar', problemaCreate.create);
+router.put('/problema/editar/:id', problemaUpdateById.updateById);
+router.delete('/problema/excluir:id', problemaDeleteById.deleteById);
 // excluir problema por id
-
 
 export default router;
