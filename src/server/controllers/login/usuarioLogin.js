@@ -12,12 +12,10 @@ const usuarioLogin = {};
 
 usuarioLogin.login = async (req, res) => {
   try {
-    const { login, senha, confSenha } = req.body;
+    const { login, senha } = req.body;
     console.log(senha);
 
     const usuario = await Usuario.findOne({ where: { login: login } });
-
-    console.log(usuario.senha);
 
     if (!login) {
       return res
@@ -30,11 +28,11 @@ usuarioLogin.login = async (req, res) => {
         .json({ message: 'Senha é obrigatório' });
     }
 
-    if (senha !== confSenha) {
-      return res
-        .status(StatusCodes.UNPROCESSABLE_ENTITY)
-        .json({ message: 'Senha incorreta' });
-    }
+    // if (senha !== confSenha) {
+    //   return res
+    //     .status(StatusCodes.UNPROCESSABLE_ENTITY)
+    //     .json({ message: 'Senha incorreta' });
+    // }
 
     if (!usuario) {
       return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
@@ -44,7 +42,7 @@ usuarioLogin.login = async (req, res) => {
 
     const checkSenha = await bcrypt.compare(senha, usuario.senha);
     console.log(senha, usuario.senha);
-    console.log(typeof senha, typeof usuario.senha);
+    // console.log(typeof senha, typeof usuario.senha);
 
     if (checkSenha == false) {
       return res
