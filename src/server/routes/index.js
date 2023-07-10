@@ -26,6 +26,8 @@ import problemaGetAll from '../controllers/problema/GetAll.js';
 import problemaGetById from '../controllers/problema/GetById.js';
 import problemaUpdateById from '../controllers/problema/UpdateById.js';
 import problemaDeleteById from '../controllers/problema/DeleteById.js';
+import problemaGetByPending from '../controllers/problema/GetByPending.js';
+import problemaGetByFinished from '../controllers/problema/GetByFinished.js';
 
 import usuarioLogin from '../controllers/login/usuarioLogin.js';
 
@@ -44,7 +46,6 @@ router.get('/cidadao/:id', cidadaoGetById.getById);
 router.post('/cidadao/cadastrar', cidadaoCreate.create);
 router.put('/cidadao/editar/:id', auth, cidadaoUpdateById.updateById);
 router.delete('/cidadao/excluir/:id', auth, cidadaoDeleteById.deleteById);
-// excluir cidadão por id
 // historico do cidadão
 
 router.get('/prefeituras', prefeituraGetAll.getAll);
@@ -52,14 +53,14 @@ router.get('/prefeituras/:id', prefeituraGetById.getById);
 router.post('/prefeitura/cadastrar', prefeituraCreate.create);
 router.put('/prefeitura/editar/:id', auth, prefeituraUpdateById.updateById);
 router.delete('/prefeitura/excluir/:id', auth, prefeituraDeleteById.deleteById);
-// excluir prefeitura por id
 // historico da prefeitura
 
-router.get('/problemas', auth, problemaGetAll.getAll);
+router.get('/problemas/pendentes', problemaGetByPending.getByPending);
+router.get('/problemas/finalizados', problemaGetByFinished.getByFinished);
+router.get('/problemas', problemaGetAll.getAll);
 router.get('/problema/:id', problemaGetById.getById);
 router.post('/problema/cadastrar', problemaCreate.create);
 router.put('/problema/editar/:id', problemaUpdateById.updateById);
 router.delete('/problema/excluir:id', problemaDeleteById.deleteById);
-// excluir problema por id
 
 export default router;
