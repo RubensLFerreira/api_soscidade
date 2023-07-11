@@ -7,13 +7,19 @@ const problemaController = {};
 
 problemaController.getByPending = async (req, res) => {
   try {
-    const problemas = await Problema.findOne({
+    const problemas = await Problema.findAll({
       where: { status: true },
       include: {
         model: Localizacao,
         as: 'localizacao',
       },
     });
+
+    if (!problemas) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'Este registro não existe!',
+      });
+    }
 
     return res.status(StatusCodes.OK).json({ problemas });
   } catch (error) {
