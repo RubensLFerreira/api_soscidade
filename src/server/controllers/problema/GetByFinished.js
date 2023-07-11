@@ -7,7 +7,7 @@ const problemaController = {};
 
 problemaController.getByFinished = async (req, res) => {
   try {
-    const problemas = await Problema.findOne({
+    const problemas = await Problema.findAll({
       where: { status: false },
       include: {
         model: Localizacao,
