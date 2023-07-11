@@ -15,6 +15,7 @@ problemaController.getById = async (req, res) => {
         message: 'Este registro não existe!',
       });
     }
+    
     return res.status(StatusCodes.ACCEPTED).json({ problema });
   } catch (error) {
     console.log(error);
