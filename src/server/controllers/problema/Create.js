@@ -13,7 +13,6 @@ const problemaController = {};
 problemaController.create = async (req, res) => {
   try {
     const {
-      imagem,
       observacao,
       status,
       categoria,
@@ -26,6 +25,8 @@ problemaController.create = async (req, res) => {
       cidade,
       uf,
     } = req.body;
+
+    const imagem = req.files;
 
     await problemaSchema.validate(
       {
@@ -56,16 +57,22 @@ problemaController.create = async (req, res) => {
 
     const resCategoria = await Categoria.findOne({ where: { id: categoria } });
     const resCidadao = await Cidadao.findOne({ where: { id: cidadao } });
-    const resPrefeitura = await Prefeitura.findOne({ where: { id: prefeitura } });
+    const resPrefeitura = await Prefeitura.findOne({
+      where: { id: prefeitura },
+    });
 
     const problema = await Problema.create({
-      imagem,
+      imagem: [],
       observacao,
       status,
       categoria_id: resCategoria.id,
       cidadao_id: resCidadao.id,
       prefeitura_id: resPrefeitura.id,
       localizacao_id: localizacao.id,
+    });
+
+    imagem.map((image) => {
+      problema.imagem.push(image.filename);
     });
 
     return res.status(StatusCodes.CREATED).json({ problema, localizacao });
