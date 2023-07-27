@@ -3,65 +3,56 @@ dotenv.config();
 
 import Usuario from '../../models/Usuario.js';
 
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-
 import { StatusCodes } from 'http-status-codes';
+import bcrypt from 'bcrypt';
+
+import createUserToken from '../../helpers/createUserToken.js';
 
 const usuarioLogin = {};
 
 usuarioLogin.login = async (req, res) => {
-  try {
-    const { login, senha } = req.body;
-    console.log(senha);
+  const { login, senha } = req.body;
+  console.log(senha);
 
-    const usuario = await Usuario.findOne({ where: { login: login } });
+  const usuario = await Usuario.findOne({ where: { login: login } });
 
-    if (!login) {
-      return res
-        .status(StatusCodes.UNPROCESSABLE_ENTITY)
-        .json({ message: 'Login é obrigatório' });
-    }
-    if (!senha) {
-      return res
-        .status(StatusCodes.UNPROCESSABLE_ENTITY)
-        .json({ message: 'Senha é obrigatório' });
-    }
-
-    // if (senha !== confSenha) {
-    //   return res
-    //     .status(StatusCodes.UNPROCESSABLE_ENTITY)
-    //     .json({ message: 'Senha incorreta' });
-    // }
-
-    if (!usuario) {
-      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
-        message: 'Registro não encontrado!',
-      });
-    }
-
-    const checkSenha = await bcrypt.compare(senha, usuario.senha);
-    console.log(senha, usuario.senha);
-    // console.log(typeof senha, typeof usuario.senha);
-
-    if (checkSenha == false) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: 'Senha inválida!' });
-    }
-
-    const secret = process.env.SECRET;
-
-    const payload = { id: usuario.id, perfil_id: usuario.perfil_id };
-    const token = jwt.sign(payload, secret);
-
-    res.status(StatusCodes.OK).json({ token });
-  } catch (error) {
-    console.log(error);
-
+  if (!login) {
     res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ message: 'Login é obrigatório' });
+    return;
+  }
+
+  if (!senha) {
+    res
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ message: 'Senha é obrigatório' });
+    return;
+  }
+
+  if (!usuario) {
+    res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
+      message: 'Registro não encontrado!',
+    });
+    return;
+  }
+
+  const checkSenha = await bcrypt.compare(senha, usuario.senha);
+  console.log(senha, usuario.senha);
+
+  if (!checkSenha) {
+    res
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ message: 'Senha inválida!' });
+  }
+
+  try {
+    await createUserToken(usuario, req, res);
+  } catch (error) {
+    res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
+      message: 'Registro não encontrado!',
+      error: error,
+    });
   }
 };
 
