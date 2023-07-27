@@ -2,12 +2,11 @@ import express from 'express';
 
 import { StatusCodes } from 'http-status-codes';
 
-// import authCidadao from '../middlewares/authCidadao.js';
-// import authPrefeitura from '../middlewares/authPrefeitura.js';
-// import authAdmin from '../middlewares/authAdmin.js';
-import auth from '../middlewares/auth.js';
+import verifyToken from '../helpers/verifyToken.js';
+import imageUpload from '../helpers/imageUpload.js';
 
 import usuarioGetById from '../controllers/Usuario/GetById.js';
+import checkUsuario from '../controllers/Usuario/CheckUsuario.js';
 
 import cidadaoCreate from '../controllers/cidadao/Create.js';
 import cidadaoGetAll from '../controllers/cidadao/GetAll.js';
@@ -40,27 +39,33 @@ router.get('/', (_, res) => {
 router.post('/login', usuarioLogin.login);
 
 router.get('/usuario/:id', usuarioGetById.getById);
+router.get('/usuario', checkUsuario.checkUsuario);
 
-router.get('/cidadaos', cidadaoGetAll.getAll);
+router.get('/cidadaos', verifyToken, cidadaoGetAll.getAll);
 router.get('/cidadao/:id', cidadaoGetById.getById);
-router.post('/cidadao/cadastrar', cidadaoCreate.create);
-router.put('/cidadao/editar/:id', auth, cidadaoUpdateById.updateById);
-router.delete('/cidadao/excluir/:id', auth, cidadaoDeleteById.deleteById);
+router.post('/cidadao/cadastrar', verifyToken, cidadaoCreate.create);
+router.put('/cidadao/editar/:id', cidadaoUpdateById.updateById);
+router.delete('/cidadao/excluir/:id', cidadaoDeleteById.deleteById);
 // historico do cidadão
 
-router.get('/prefeituras', prefeituraGetAll.getAll);
+router.get('/prefeituras', verifyToken, prefeituraGetAll.getAll);
 router.get('/prefeituras/:id', prefeituraGetById.getById);
 router.post('/prefeitura/cadastrar', prefeituraCreate.create);
-router.put('/prefeitura/editar/:id', auth, prefeituraUpdateById.updateById);
-router.delete('/prefeitura/excluir/:id', auth, prefeituraDeleteById.deleteById);
+router.put('/prefeitura/editar/:id', prefeituraUpdateById.updateById);
+router.delete('/prefeitura/excluir/:id', prefeituraDeleteById.deleteById);
 // historico da prefeitura
 
 router.get('/problemas/pendentes', problemaGetByPending.getByPending);
 router.get('/problemas/finalizados', problemaGetByFinished.getByFinished);
 router.get('/problemas', problemaGetAll.getAll);
 router.get('/problema/:id', problemaGetById.getById);
-router.post('/problema/cadastrar', problemaCreate.create);
+router.post(
+  '/problema/cadastrar/:tipo',
+  verifyToken,
+  imageUpload.array('imagem'),
+  problemaCreate.create
+);
 router.put('/problema/editar/:id', problemaUpdateById.updateById);
-router.delete('/problema/excluir:id', problemaDeleteById.deleteById);
+router.delete('/problema/excluir/:id', problemaDeleteById.deleteById);
 
 export default router;
