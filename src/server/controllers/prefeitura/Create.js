@@ -6,21 +6,14 @@ import prefeituraSchema from '../../validators/prefeituraValidator.js';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 
+import createUserToken from '../../helpers/createUserToken.js';
+
 const prefeituraController = {};
 
 prefeituraController.create = async (req, res) => {
   try {
-    const {
-      nome,
-      telefone,
-      email,
-      prefeito,
-      site,
-      login,
-      senha,
-    } = req.body;
+    const { nome, telefone, email, prefeito, site, login, senha } = req.body;
 
-    
     await prefeituraSchema.validate(
       {
         nome,
@@ -33,7 +26,7 @@ prefeituraController.create = async (req, res) => {
       },
       { abortEarly: false }
     );
-    
+
     const salt = await bcrypt.genSalt(5);
     const senhaHash = await bcrypt.hash(senha, salt);
 
@@ -46,13 +39,13 @@ prefeituraController.create = async (req, res) => {
       perfil_id: 2,
     });
 
-    const prefeitura = await Prefeitura.create({
+    await Prefeitura.create({
       site,
       prefeito,
       usuario_id: usuario.id,
     });
 
-    return res.status(StatusCodes.CREATED).json({ prefeitura, usuario });
+    await createUserToken(usuario, req, res);
   } catch (error) {
     console.log(error);
 
