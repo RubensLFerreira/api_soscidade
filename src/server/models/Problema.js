@@ -13,7 +13,7 @@ const Problema = sequelize.define(
       primaryKey: true,
     },
     imagem: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: true,
     },
     observacao: {
