@@ -3,6 +3,8 @@ import Usuario from '../../models/Usuario.js';
 
 import cidadaoSchema from '../../validators/cidadaoValidator.js';
 
+import createUserToken from '../../helpers/createUserToken.js';
+
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcrypt';
 
@@ -10,16 +12,8 @@ const cidadaoController = {};
 
 cidadaoController.create = async (req, res) => {
   try {
-    const {
-      nome,
-      cpf,
-      sexo,
-      nascimento,
-      telefone,
-      email,
-      login,
-      senha
-    } = req.body;
+    const { nome, cpf, sexo, nascimento, telefone, email, login, senha } =
+      req.body;
 
     await cidadaoSchema.validate(
       {
@@ -47,14 +41,14 @@ cidadaoController.create = async (req, res) => {
       perfil_id: 1,
     });
 
-    const cidadao = await Cidadao.create({
+    await Cidadao.create({
       cpf,
       sexo,
       nascimento,
       usuario_id: usuario.id,
     });
 
-    return res.status(StatusCodes.CREATED).json({ cidadao, usuario });
+    await createUserToken(usuario, req, res);
   } catch (error) {
     console.log(error);
 
