@@ -52,10 +52,12 @@ cidadaoController.create = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: 'Erro ao criar registro!',
       validator: error.errors,
     });
+
+    return;
   }
 };
 

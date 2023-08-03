@@ -41,9 +41,9 @@ router.post('/login', usuarioLogin.login);
 router.get('/usuario/:id', usuarioGetById.getById);
 router.get('/usuario', checkUsuario.checkUsuario);
 
-router.get('/cidadaos', verifyToken, cidadaoGetAll.getAll);
+router.get('/cidadaos', cidadaoGetAll.getAll);
 router.get('/cidadao/:id', cidadaoGetById.getById);
-router.post('/cidadao/cadastrar', verifyToken, cidadaoCreate.create);
+router.post('/cidadao/cadastrar', cidadaoCreate.create);
 router.put('/cidadao/editar/:id', cidadaoUpdateById.updateById);
 router.delete('/cidadao/excluir/:id', cidadaoDeleteById.deleteById);
 // historico do cidadão
