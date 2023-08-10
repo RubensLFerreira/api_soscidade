@@ -1,8 +1,8 @@
 import Problema from '../../models/Problema.js';
 import Localizacao from '../../models/Localizacao.js';
 import Categoria from '../../models/Categoria.js';
-import Cidadao from '../../models/Cidadao.js';
 import Prefeitura from '../../models/Prefeitura.js';
+import Usuario from '../../models/Usuario.js';
 
 import problemaSchema from '../../validators/problemaValidator.js';
 
@@ -16,7 +16,7 @@ problemaController.create = async (req, res) => {
       observacao,
       status,
       categoria,
-      cidadao,
+      usuario,
       prefeitura,
       latitude,
       longitude,
@@ -34,7 +34,7 @@ problemaController.create = async (req, res) => {
         observacao,
         status,
         categoria,
-        cidadao,
+        usuario,
         prefeitura,
         latitude,
         longitude,
@@ -56,7 +56,7 @@ problemaController.create = async (req, res) => {
     });
 
     const resCategoria = await Categoria.findOne({ where: { id: categoria } });
-    const resCidadao = await Cidadao.findOne({ where: { id: cidadao } });
+    const resUsuario = await Usuario.findOne({ where: { id: usuario } });
     const resPrefeitura = await Prefeitura.findOne({
       where: { id: prefeitura },
     });
@@ -66,7 +66,7 @@ problemaController.create = async (req, res) => {
       observacao,
       status,
       categoria_id: resCategoria.id,
-      cidadao_id: resCidadao.id,
+      usuario_id: resUsuario.id,
       prefeitura_id: resPrefeitura.id,
       localizacao_id: localizacao.id,
     });
