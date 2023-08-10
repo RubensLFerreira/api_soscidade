@@ -18,7 +18,7 @@ function initModels(sequelize) {
 
   problema.belongsTo(categoria, { as: "categorium", foreignKey: "categoria_id"});
   categoria.hasMany(problema, { as: "problemas", foreignKey: "categoria_id"});
-  problema.belongsTo(cidadao, { as: "cidadao", foreignKey: "cidadao_id"});
+  problema.belongsTo(usuario, { as: "usuario", foreignKey: "usuario_id"});
   cidadao.hasMany(problema, { as: "problemas", foreignKey: "cidadao_id"});
   problema.belongsTo(localizacao, { as: "localizacao", foreignKey: "localizacao_id"});
   localizacao.hasMany(problema, { as: "problemas", foreignKey: "localizacao_id"});

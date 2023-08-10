@@ -32,11 +32,11 @@ const Problema = sequelize.define(
         key: 'id',
       },
     },
-    cidadao_id: {
+    usuario_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'cidadao',
+        model: 'usuario',
         key: 'id',
       },
     },
