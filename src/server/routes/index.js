@@ -61,7 +61,6 @@ router.get('/problemas', problemaGetAll.getAll);
 router.get('/problema/:id', problemaGetById.getById);
 router.post(
   '/problema/cadastrar/:tipo',
-  verifyToken,
   imageUpload.array('imagem'),
   problemaCreate.create
 );
