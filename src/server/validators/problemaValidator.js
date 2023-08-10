@@ -11,11 +11,11 @@ const problemaSchema = yup.object().shape({
     .integer('Obrigatório informar id da categoria')
     .moreThan(0, 'Valor do id não pode ser 0')
     .required('Campo categoria é obrigatório'),
-  cidadao: yup
+  usuario: yup
     .number()
-    .integer('Obrigatório informar id do cidadão')
+    .integer('Obrigatório informar id do usuário')
     .moreThan(0, 'Valor do id não pode ser 0')
-    .required('Campo cidadao é obrigatório'),
+    .required('Campo usuário é obrigatório'),
   prefeitura: yup
     .number()
     .integer('Obrigatório informar id da prefeitura')
