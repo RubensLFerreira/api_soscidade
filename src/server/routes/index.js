@@ -7,6 +7,7 @@ import imageUpload from '../helpers/imageUpload.js';
 
 import usuarioGetById from '../controllers/Usuario/GetById.js';
 import checkUsuario from '../controllers/Usuario/CheckUsuario.js';
+import getAllUsuarios from '../controllers/Usuario/GetAll.js';
 
 import cidadaoCreate from '../controllers/cidadao/Create.js';
 import cidadaoGetAll from '../controllers/cidadao/GetAll.js';
@@ -27,6 +28,7 @@ import problemaUpdateById from '../controllers/problema/UpdateById.js';
 import problemaDeleteById from '../controllers/problema/DeleteById.js';
 import problemaGetByPending from '../controllers/problema/GetByPending.js';
 import problemaGetByFinished from '../controllers/problema/GetByFinished.js';
+import problemaGetByUser from '../controllers/problema/GetProblemByUser.js';
 
 import usuarioLogin from '../controllers/login/usuarioLogin.js';
 
@@ -40,6 +42,7 @@ router.post('/login', usuarioLogin.login);
 
 router.get('/usuario/:id', usuarioGetById.getById);
 router.get('/usuario', checkUsuario.checkUsuario);
+router.get('/usuarios', getAllUsuarios.getAllUsuarios);
 
 router.get('/cidadaos', cidadaoGetAll.getAll);
 router.get('/cidadao/:id', cidadaoGetById.getById);
@@ -59,6 +62,7 @@ router.get('/problemas/pendentes', problemaGetByPending.getByPending);
 router.get('/problemas/finalizados', problemaGetByFinished.getByFinished);
 router.get('/problemas', problemaGetAll.getAll);
 router.get('/problema/:id', problemaGetById.getById);
+router.get('/problemas/usuario/:id', problemaGetByUser.getAllProblemUser);
 router.post(
   '/problema/cadastrar/:tipo',
   imageUpload.array('imagem'),
