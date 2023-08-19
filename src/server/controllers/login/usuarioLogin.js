@@ -44,6 +44,7 @@ usuarioLogin.login = async (req, res) => {
     res
       .status(StatusCodes.UNPROCESSABLE_ENTITY)
       .json({ message: 'Senha inválida!' });
+      return;
   }
 
   try {

@@ -25,7 +25,7 @@ const prefeituraSchema = yup.object().shape({
   senha: yup
     .string()
     .min(3, 'Senha precisa ter no minímo 3 caracteres')
-    .max(10, 'Senha precisa ter no máximo 10 caracteres')
+    .max(20, 'Senha precisa ter no máximo 10 caracteres')
     .required('Campo senha obrigatório'),
 });
 
