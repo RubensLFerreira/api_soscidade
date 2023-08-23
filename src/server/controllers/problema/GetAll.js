@@ -8,6 +8,7 @@ const problemaController = {};
 problemaController.getAll = async (req, res) => {
   try {
     const problemas = await Problema.findAll({
+      order: [['createdAt', 'DESC']],
       include: {
         model: Localizacao,
         as: 'localizacao',

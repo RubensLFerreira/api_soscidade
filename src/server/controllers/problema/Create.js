@@ -26,7 +26,7 @@ problemaController.create = async (req, res) => {
       uf,
     } = req.body;
 
-    const imagem = req.files;
+    const imagem = req.files.map((file) => file.filename);
 
     await problemaSchema.validate(
       {
@@ -62,7 +62,7 @@ problemaController.create = async (req, res) => {
     });
 
     const problema = await Problema.create({
-      imagem: [],
+      imagem: imagem,
       observacao,
       status,
       categoria_id: resCategoria.id,
@@ -79,10 +79,12 @@ problemaController.create = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: 'Erro ao criar registro!',
       validator: error.errors,
     });
+
+    return;
   }
 };
 
