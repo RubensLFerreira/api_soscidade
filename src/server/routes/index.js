@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import verifyToken from '../helpers/verifyToken.js';
 import imageUpload from '../helpers/imageUpload.js';
+import imagemGetByName from '../controllers/imagens/GetAll.js';
 
 import usuarioGetById from '../controllers/Usuario/GetById.js';
 import checkUsuario from '../controllers/Usuario/CheckUsuario.js';
@@ -49,14 +50,12 @@ router.get('/cidadao/:id', cidadaoGetById.getById);
 router.post('/cidadao/cadastrar', cidadaoCreate.create);
 router.put('/cidadao/editar/:id', cidadaoUpdateById.updateById);
 router.delete('/cidadao/excluir/:id', cidadaoDeleteById.deleteById);
-// historico do cidadão
 
 router.get('/prefeituras', verifyToken, prefeituraGetAll.getAll);
 router.get('/prefeituras/:id', prefeituraGetById.getById);
 router.post('/prefeitura/cadastrar', prefeituraCreate.create);
 router.put('/prefeitura/editar/:id', prefeituraUpdateById.updateById);
 router.delete('/prefeitura/excluir/:id', prefeituraDeleteById.deleteById);
-// historico da prefeitura
 
 router.get('/problemas/pendentes', problemaGetByPending.getByPending);
 router.get('/problemas/finalizados', problemaGetByFinished.getByFinished);
@@ -70,5 +69,7 @@ router.post(
 );
 router.put('/problema/editar/:id', problemaUpdateById.updateById);
 router.delete('/problema/excluir/:id', problemaDeleteById.deleteById);
+
+router.get('/imagem/:imageName', imagemGetByName.getAll);
 
 export default router;
