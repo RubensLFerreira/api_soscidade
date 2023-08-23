@@ -55,7 +55,7 @@ Observação:
  
 ## Arquitetura das pastas no back-end
 
-![App Screenshot](https://live.staticflickr.com/65535/53137286366_101819c47f.jpg)
+![App Screenshot](https://live.staticflickr.com/65535/53137286366_101819c47f_b.jpg)
 
 
 ## Autores
