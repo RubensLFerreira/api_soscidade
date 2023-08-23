@@ -3,7 +3,7 @@ import path from 'path';
 
 const imageStorage = multer.diskStorage({
   destination: function (req, file, callback) {
-    const tipo = req.params.tipo; // Captura o parâmetro "tipo" da URL
+    const tipo = req.params.tipo;
     const folder =
       tipo === 'cidadao'
         ? 'cidadao'
