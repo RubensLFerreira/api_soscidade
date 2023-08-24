@@ -53,9 +53,82 @@ Observação:
  - [yup](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
 
  
-## Arquitetura das pastas no back-end
+## Arquitetura das pastas (back-end)
 
 ![App Screenshot](https://live.staticflickr.com/65535/53137286366_101819c47f_b.jpg)
+
+## Diagrama ERP
+
+![App Screenshot](https://live.staticflickr.com/65535/53139414705_610818ff98_c.jpg)
+
+## Endpoints/rotas
+
+```http
+  BaseURL (http://localhost:8080)
+```
+```http
+  Token (Chave de autorização e autenticação)
+```
+
+#### Rotas de usuário
+
+| Requisição | Rota     | Descrição                |
+| :-------- | :------- | :------------------------- |
+| `GET` | `/usuarios` | Buscar todos os usuários |
+| `GET` | `/usuario` | Verificar se usuário existe através do **token** |
+| `GET` | `/usuario/:id` | Buscar usuário pelo seu ID |
+
+#### Rotas de cidadão
+
+| Requisição | Rota     | Descrição                |
+| :-------- | :------- | :------------------------- |
+| `GET` | `/cidadaos` | Buscar todos os cidadaos |
+| `GET` | `/cidadao/:id` | Verificar se cidadão existe pelo ID |
+| `POST` | `/cidadaos/cadastrar` | Criar novo registro |
+| `PUT` | `/editar/:id` | Editar cidadão pelo ID |
+| `DELETE` | `/excluir/:id` | Excluir cidadão pelo ID |
+
+#### Rotas de prefeitura
+
+| Requisição | Rota     | Descrição                |
+| :-------- | :------- | :------------------------- |
+| `GET` | `/prefeituras` | Buscar todas as prefeituras |
+| `GET` | `/prefeitura/:id` | Verificar se prefeitura existe pelo ID |
+| `POST` | `/prefeitura/cadastrar` | Criar novo registro |
+| `PUT` | `/prefeitura/editar/:id` | Editar prefeitura pelo ID |
+| `DELETE` | `/prefeitura/excluir/:id` | Excluir prefeitura pelo ID |
+
+#### Rotas de problema
+
+| Requisição | Rota     | Descrição                |
+| :-------- | :------- | :------------------------- |
+| `GET` | `/problemas` | Buscar todos os problemas |
+| `GET` | `/problema/:id` | Buscar problema pelo ID |
+| `GET` | `/problemas/usuario/:id` | Buscar problemas pelo **token** do usuario |
+| `GET` | `/problemas/pendentes` | Buscar problemas pendentes |
+| `GET` | `/problemas/finalizados` |Buscar problemas finalizados |
+| `POST` | `/problemas/cadastrar/:tipo` | Registrar novo problema |
+| `PUT` | `/problemas/editar/:id` | Editar problema pelo ID |
+| `DELETE` | `/problemas/excluir/:id` | Excluir problema pelo ID |
+
+#### Outras rotas
+
+| Requisição | Rota     | Descrição                |
+| :-------- | :------- | :-------------------------------- |
+| `GET`      | `baseURL/` | Página inicial da aplicação |
+| `POST`      | `baseURL/login` | Rota de login de usuário |
+| `GET`      | `baseURL/imagem/:imagemName` | Busca imagem pelo nome |
+
+
+
+## Regras de negócio
+
+| Entidades             | Descrição                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Cidadão |  #0a192f |
+| Prefeitura |  #f8f8f8 |
+| Administrador |  #00b48a |
+
 
 
 ## Autores
