@@ -55,22 +55,22 @@ O SOSCidade surge como uma proposta de sistema que visa solucionar os problemas 
 
 > ### ⚙ Dependências
 
- - [http-status-codes](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [jsonwebtoken](https://github.com/matiassingers/awesome-readme)
- - [sequelize](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [bcrypt](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [express](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [multer](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [pg](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+ - [http-status-codes](https://www.npmjs.com/package/http-status-codes)
+ - [jsonwebtoken](https://jwt.io/)
+ - [sequelize](https://sequelize.org/)
+ - [bcrypt](https://www.npmjs.com/package/bcrypt)
+ - [express](https://expressjs.com/pt-br/)
+ - [multer](https://www.npmjs.com/package/multer)
+ - [pg](https://www.npmjs.com/package/pg)
 
 <br/>
 
 > ### ⚙ Dependências de desenvolvimento
- - [eslint-config-prettie](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [nodemon](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [prettier](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [sucrese](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
- - [yup](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+ - [eslint-config-prettie](https://github.com/prettier/eslint-config-prettier)
+ - [nodemon](https://nodemon.io/)
+ - [prettier](https://prettier.io/)
+ - [sucrese](https://sucrase.io/)
+ - [yup](https://www.npmjs.com/package/yup)
 
 <br/>
 
@@ -158,9 +158,11 @@ http://localhost:8080/
 
 Observação: 
 
-- Baixar as extensões recomendadas na pasta `vscode`.
+- Baixar as extensões recomendadas na pasta `.vscode`.
 - É necessário atualizar a conexão com banco de dados com suas credências no arquivo `.venv` com base no exemplo `.venv.exemple`.
 - Passar um valor aleatório para a chave SECRET no arquivo `.venv.exemple`.
+
+<br/> 
 
 > ### 🏆 Equipe
 
