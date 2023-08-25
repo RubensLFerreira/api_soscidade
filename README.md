@@ -57,7 +57,33 @@ erDiagram
 
 > ### 🗂 Arquitetura das pastas (back-end)
 
-![App Screenshot](https://i.pinimg.com/originals/62/fe/aa/62feaa2a9603813a63ee4dc85f893534.png)
+```mermaid
+flowchart TB
+    subgraph recommendation
+     vscode
+    end
+
+    subgraph source
+    src --- index.js
+    end
+    
+    subgraph application
+    src --- server
+    server --- server.js
+    server --- controllers
+    server --- database
+    server --- helpers
+    server --- models
+    server --- router
+    server --- validations
+    end
+
+    subgraph uploads
+    server --- public 
+    public --- imagens
+    imagens --- denuncias
+    end
+```
 
 <br/>
 
